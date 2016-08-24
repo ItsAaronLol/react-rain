@@ -10,7 +10,7 @@ var AddBooking = React.createClass({
     var bookingDate = this.refs.bookingDate.value;
     var bookingTime = this.refs.bookingTime.value;
     if(bookingName.length>0 && bookingNumber.length>0 && bookingDate.length>0 && bookingTime.length>0){
-      this.props.onAddTodo(bookingName, bookingNumber, bookingDate, bookingTime);
+      this.props.onAddBooking(bookingName, bookingNumber, bookingDate, bookingTime);
     } else {
       this.refs.bookingName.focus();
     }

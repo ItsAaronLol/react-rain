@@ -15,26 +15,29 @@ var BookingApp = React.createClass({
           name: 'Timothy',
           number: '0433928172',
           date: '20th June',
-          time: '2pm'
+          time: '2pm',
+          completed: false
         }, {
           id: uuid(),
           name: 'John',
           number: '0493829312',
           date: '24th June',
-          time: '3pm'
+          time: '3pm',
+          completed: true
         }, {
           id: uuid(),
           name: 'Bronson',
           number: '0438302932',
           date: '25t June',
-          time: '5pm'
+          time: '5pm',
+          completed: true
         }, {
           id: uuid(),
           name: 'Jimmy',
           number: '0493806911',
           date: '26th June',
-          time: '8pm'
-
+          time: '8pm',
+          completed: false
         }
       ]
     };
@@ -49,10 +52,20 @@ var BookingApp = React.createClass({
           name: name,
           number: number,
           date: date,
-          time: time
+          time: time,
+          completed: false
         }
       ]
     });
+  },
+  handleToggle: function(id){
+    var updatedBookings = this.state.bookings.map((booking) => {
+      if(booking.id === id){
+        booking.completed = !booking.completed;
+      }
+      return booking;
+    });
+    this.setState({bookings: updatedBookings});
   },
   handleSearch: function (showCompleted, searchText){
     this.setState({
@@ -65,8 +78,8 @@ var BookingApp = React.createClass({
     return (
       <div>
         <BookingSearch onSearch = {this.handleSearch}/>
-        <BookingList bookings={bookings}/>
-        <AddBooking onAddTodo={this.handleAddBooking}/>
+        <BookingList bookings={bookings} onToggle={this.handleToggle}/>
+        <AddBooking onAddBooking={this.handleAddBooking}/>
       </div>
     )
   }

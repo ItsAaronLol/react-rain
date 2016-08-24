@@ -7,7 +7,7 @@ var BookingList = React.createClass({
     var renderBookings = () => {
       return bookings.map((booking) => {
         return (
-          <Booking key={booking.id} {...booking}/>
+          <Booking key={booking.id} {...booking} onToggle={this.props.onToggle}/>
         );
       });
     };

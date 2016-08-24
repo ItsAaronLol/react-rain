@@ -23,4 +23,17 @@ describe('BookingApp', () => {
 
     expect(bookingApp.state.bookings[0].name).toBe(bookingName);
   });
+
+  it('should toggle completed value when handleToggle is called', () => {
+    var bookingData = {
+      id: 11,
+      text: 'Test features',
+      completed: false
+    };
+    var bookingApp = TestUtils.renderIntoDocument(<BookingApp/>);
+    bookingApp.setState({bookings: [bookingData]});
+    expect(bookingApp.state.bookings[0].completed).toBe(false);
+    bookingApp.handleToggle(11);
+    expect(bookingApp.state.bookings[0].completed).toBe(true);
+  });
 });

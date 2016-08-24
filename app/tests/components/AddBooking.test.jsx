@@ -13,7 +13,7 @@ describe('AddBooking', () => {
 
   it('should call onAddBooking prop with valid data', () => {
     var spy = expect.createSpy();
-    var addBooking = TestUtils.renderIntoDocument(<AddBooking onAddTodo={spy}/>);
+    var addBooking = TestUtils.renderIntoDocument(<AddBooking onAddBooking={spy}/>);
     var $el = $(ReactDOM.findDOMNode(addBooking));
 
     addBooking.refs.bookingName.value = 'Jimbo';
@@ -27,7 +27,7 @@ describe('AddBooking', () => {
 
   it('should not call onAddBooking prop with invalid data', () => {
     var spy = expect.createSpy();
-    var addBooking = TestUtils.renderIntoDocument(<AddBooking onAddTodo={spy}/>);
+    var addBooking = TestUtils.renderIntoDocument(<AddBooking onAddBooking={spy}/>);
     var $el = $(ReactDOM.findDOMNode(addBooking));
 
     addBooking.refs.bookingName.value = '';
