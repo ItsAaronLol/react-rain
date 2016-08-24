@@ -2,6 +2,7 @@ var React = require('react');
 var BookingList = require('BookingList')
 var AddBooking = require('AddBooking');
 var BookingSearch = require('BookingSearch');
+var uuid = require('node-uuid');
 
 var BookingApp = React.createClass({
   getInitialState: function () {
@@ -10,29 +11,54 @@ var BookingApp = React.createClass({
       searchText: '',
       bookings: [
         {
-          id: 1,
-          name: 'Timothy'
+          id: uuid(),
+          name: 'Timothy',
+          number: '0433928172',
+          date: '20th June',
+          time: '2pm'
         }, {
-          id: 2,
-          name: 'John'
+          id: uuid(),
+          name: 'John',
+          number: '0493829312',
+          date: '24th June',
+          time: '3pm'
         }, {
-          id: 3,
-          name: 'Bronson'
+          id: uuid(),
+          name: 'Bronson',
+          number: '0438302932',
+          date: '25t June',
+          time: '5pm'
         }, {
-          id: 4,
-          name: 'Jimmy'
+          id: uuid(),
+          name: 'Jimmy',
+          number: '0493806911',
+          date: '26th June',
+          time: '8pm'
+
         }
       ]
     };
   },
   handleAddBooking: function(name, number, date, time){
-    alert('name: ' + name + ' | number: ' + number + ' | date: ' + date + ' | time: ' + time);
+    //alert('name: ' + name + ' | number: ' + number + ' | date: ' + date + ' | time: ' + time);
+    this.setState({
+      bookings: [
+        ...this.state.bookings,
+        {
+          id: uuid(),
+          name: name,
+          number: number,
+          date: date,
+          time: time
+        }
+      ]
+    });
   },
   handleSearch: function (showCompleted, searchText){
     this.setState({
       showCompleted: showCompleted,
       searchText: searchText.toLowerCase()
-    })
+    });
   },
   render: function () {
     var {bookings} = this.state;

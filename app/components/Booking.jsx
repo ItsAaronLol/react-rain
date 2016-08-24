@@ -3,12 +3,16 @@ var React = require('react');
 var Booking = React.createClass({
 
   render: function(){
-    var {id} = this.props;
-    var {name} = this.props;
+    var {id, name, number, date, time} = this.props;
+
     return(
       <div>
         {id}
         {name}
+        {number}
+        {date}
+        {time}
+
       </div>
     );
   }
