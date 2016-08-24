@@ -23,7 +23,7 @@ var AddBooking = React.createClass({
           <input type="text" ref="bookingNumber" placeholder = "Phone Number"/>
           <input type="text" ref="bookingDate" placeholder = "Date"/>
           <input type="text" ref="bookingTime" placeholder = "Time"/>
-          <button>Add Booking</button>
+          <button className = "button expanded">Add Booking</button>
         </form>
       </div>
     );
