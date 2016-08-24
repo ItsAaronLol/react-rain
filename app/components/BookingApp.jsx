@@ -1,5 +1,7 @@
 var React = require('react');
 var BookingList = require('BookingList')
+var AddBooking = require('AddBooking');
+
 var BookingApp = React.createClass({
   getInitialState: function () {
     return {
@@ -20,11 +22,15 @@ var BookingApp = React.createClass({
       ]
     };
   },
+  handleAddBooking: function(name, number, date, time){
+    alert('name: ' + name + ' | number: ' + number + ' | date: ' + date + ' | time: ' + time);
+  },
   render: function () {
     var {bookings} = this.state;
     return (
       <div>
         <BookingList bookings={bookings}/>
+        <AddBooking onAddTodo={this.handleAddBooking}/>
       </div>
     )
   }
