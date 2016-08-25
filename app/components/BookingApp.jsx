@@ -1,7 +1,6 @@
-
-
 var React = require('react');
 var uuid = require('node-uuid');
+var moment = require('moment');
 
 var BookingList = require('BookingList')
 var AddBooking = require('AddBooking');
@@ -30,7 +29,9 @@ var BookingApp = React.createClass({
           number: number,
           date: date,
           time: time,
-          completed: false
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
         }
       ]
     });
@@ -39,6 +40,7 @@ var BookingApp = React.createClass({
     var updatedBookings = this.state.bookings.map((booking) => {
       if(booking.id === id){
         booking.completed = !booking.completed;
+        booking.completedAt = booking.completed ? moment().unix() : undefined;
       }
       return booking;
     });
@@ -51,11 +53,12 @@ var BookingApp = React.createClass({
     });
   },
   render: function () {
-    var {bookings} = this.state;
+    var {bookings, showCompleted, searchText} = this.state;
+    var filteredBookings = BookingAPI.filterBookings(bookings, showCompleted, searchText);
     return (
       <div>
         <BookingSearch onSearch = {this.handleSearch}/>
-        <BookingList bookings={bookings} onToggle={this.handleToggle}/>
+        <BookingList bookings={filteredBookings} onToggle={this.handleToggle}/>
         <AddBooking onAddBooking={this.handleAddBooking}/>
       </div>
     )

@@ -60,4 +60,52 @@ describe('BookingAPI', () => {
     });
   });
 
+  describe('filterBookings', () => {
+    var bookings =[{
+      id: 1,
+      name: 'Jimmy',
+      number: '0422948458',
+      date: '20th august',
+      time: '5pm',
+      completed: true
+    }, {
+      id: 2,
+      name: 'Ronnie',
+      number: '0433928374',
+      date: '20th November',
+      time: '2pm',
+      completed: false
+    }, {
+      id: 3,
+      name: 'Peter',
+      number: '0433928374',
+      date: '20th July',
+      time: '1pm',
+      completed: true
+    }];
+
+    it('should return all items if showCompleted is true', () => {
+      var filteredBookings = BookingAPI.filterBookings(bookings,true,'');
+      expect(filteredBookings.length).toBe(3);
+    });
+
+    it('should return uncompleted items if showCompleted is false', () => {
+      var filteredBookings = BookingAPI.filterBookings(bookings,false,'');
+      expect(filteredBookings.length).toBe(1);
+    });
+
+    it('should sort by completed status', () => {
+      var filteredBookings = BookingAPI.filterBookings(bookings,true, '');
+      expect(filteredBookings[0].completed).toBe(false);
+    });
+
+    it('should filter bookings by searchText', () => {
+      var filteredBookings = BookingAPI.filterBookings(bookings,true, 'peter');
+      expect(filteredBookings.length).toBe(1);
+    });
+    it('should return all bookings if searchText is empty', () => {
+      var filteredBookings = BookingAPI.filterBookings(bookings,true, '');
+      expect(filteredBookings.length).toBe(3);
+    });
+  });
 });

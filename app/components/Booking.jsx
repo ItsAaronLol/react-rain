@@ -1,19 +1,31 @@
 var React = require('react');
-
+var moment = require('moment');
 var Booking = React.createClass({
 
   render: function(){
-    var {id, name, number, date, time, completed} = this.props;
+    var {id, name, number, date, time, completed, createdAt, completedAt} = this.props;
+    var renderDate = () => {
+      var message = 'Created ';
+      var timestamp = createdAt;
 
+      if(completed){
+        message = 'Completed ';
+        timestamp = completedAt;
+      }
+
+      return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
+    };
     return(
       <div onClick={()=>{
           this.props.onToggle(id);
         }}>
         <input type = "checkbox" checked={completed}/>
-        {name}
+        <p>{name}
         {number}
         {date}
-        {time}
+        {time}</p>
+        <p>{renderDate()}</p>
+
       </div>
     );
   }
